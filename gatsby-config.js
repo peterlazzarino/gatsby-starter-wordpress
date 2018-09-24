@@ -23,14 +23,20 @@ module.exports = {
       resolve: 'gatsby-source-wordpress',
       options: {
         // The base url to your WP site.
-        baseUrl: 'ericwindmill.host',
+        baseUrl: 'blog.collegevine.com',
         // WP.com sites set to true, WP.org set to false
         hostingWPCOM: false,
         // The protocol. This can be http or https.
-        protocol: 'http',
+        protocol: 'https',
         // Use 'Advanced Custom Fields' Wordpress plugin
-        useACF: true,
-        auth: {},
+        useACF: false,
+        auth: {
+          // If auth.user and auth.pass are filled, then the source plugin will be allowed
+          // to access endpoints that are protected with .htaccess.
+          htaccess_sendImmediately: false,
+          htaccess_user: "peter@collegevine.com",
+          htaccess_pass: "Guano311#$%",
+        },
         // Set to true to debug endpoints on 'gatsby build'
         verboseOutput: false
       }
@@ -44,6 +50,7 @@ module.exports = {
     'gatsby-plugin-sharp',
     'gatsby-plugin-catch-links',
     'gatsby-plugin-twitter',
+    `gatsby-plugin-lodash`,
     'gatsby-plugin-sitemap',
     {
       resolve: 'gatsby-plugin-manifest',

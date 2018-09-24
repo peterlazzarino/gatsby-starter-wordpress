@@ -1,32 +1,15 @@
 import React from 'react'
-import Helmet from 'react-helmet'
 import styled from 'styled-components'
-import PostListing from '../components/Posts/PostListing/PostListing'
-import SEO from '../components/Accessories/SEO/SEO'
-import config from '../../data/SiteConfig'
-import TopNavigation from '../components/Layout/Navigation/Navigation'
+import { graphql } from "gatsby";
 
 class Index extends React.Component {
   render() {
-    const postEdges = this.props.data.allWordpressPost.edges
+    const posts = this.props.data.allWordpressPost.edges
     return (
       <HomeContainer>
-        <Helmet title={config.siteTitle} />
-        <SEO postEdges={postEdges} />
-        <TopNavigation pages={this.props.data.allWordpressPage} />
         <MainContentContainer>
-          <h1>Gatsby + Wordpress Blog</h1>
-          <p style={{ textAlign: 'center' }}>
-            Created by Eric Windmill.{' '}
-            <a
-              style={{ fontSize: '1.6rem' }}
-              href="https://twitter.com/ericwindmill"
-            >
-              You should follow him on Twitter
-            </a>
-          </p>
+          <h1>CV Blog </h1>
           <Divider />
-          <PostListing postEdges={postEdges} />
         </MainContentContainer>
       </HomeContainer>
     )
@@ -61,11 +44,9 @@ const MainContentContainer = styled.main`
     background-color: grey;
   }
 `
-
-/* eslint no-undef: "off"*/
 export const pageQuery = graphql`
   query IndexQuery {
-    allWordpressPost {
+    allWordpressPost(limit:5, filter: {categories: { name : {eq : "Essay Breakdown"}}}) {
       edges {
         node {
           featured_media {
@@ -73,11 +54,6 @@ export const pageQuery = graphql`
           }
           author {
             name
-            avatar_urls {
-              wordpress_24
-              wordpress_48
-              wordpress_96
-            }
           }
           date
           slug
@@ -85,10 +61,6 @@ export const pageQuery = graphql`
           modified
           excerpt
           id
-          acf {
-            project
-            date
-          }
           categories {
             name
           }
@@ -98,15 +70,6 @@ export const pageQuery = graphql`
           content
         }
       }
-    }
-    allWordpressPage {
-      edges {
-        node {
-          slug
-          title
-          id
-        }
-      }
-    }
+    }    
   }
 `

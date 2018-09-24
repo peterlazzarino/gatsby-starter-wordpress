@@ -1,9 +1,8 @@
 const path = require("path");
 const _ = require("lodash");
-const webpackLodashPlugin = require("lodash-webpack-plugin");
 
-// exports.onCreateNode = ({ node, boundActionCreators, getNode }) => {
-//   const { createNodeField } = boundActionCreators;
+// exports.onCreateNode = ({ node, actions, getNode }) => {
+//   const { createNodeField } = actions;
 //   let slug;
 //   if (node.internal.type === "wordpress__POST") {
 //     const fileNode = getNode(node.parent);
@@ -30,8 +29,8 @@ const webpackLodashPlugin = require("lodash-webpack-plugin");
 //   }
 // };
 
-exports.createPages = ({ graphql, boundActionCreators }) => {
-  const { createPage } = boundActionCreators;
+exports.createPages = ({ graphql, actions }) => {
+  const { createPage } = actions;
 
   return new Promise((resolve, reject) => {
     // The pages that will be created with each Node. They can stay the same.
@@ -126,10 +125,4 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
       })
     );
   });
-};
-
-exports.modifyWebpackConfig = ({ config, stage }) => {
-  if (stage === "build-javascript") {
-    config.plugin("Lodash", webpackLodashPlugin, null);
-  }
 };
