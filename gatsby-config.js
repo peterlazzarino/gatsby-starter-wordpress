@@ -34,8 +34,8 @@ module.exports = {
           // If auth.user and auth.pass are filled, then the source plugin will be allowed
           // to access endpoints that are protected with .htaccess.
           htaccess_sendImmediately: false,
-          htaccess_user: "peter@collegevine.com",
-          htaccess_pass: "Guano311#$%",
+          htaccess_user: "",
+          htaccess_pass: "",
         },
         // Set to true to debug endpoints on 'gatsby build'
         verboseOutput: false
